@@ -1,0 +1,16 @@
+引用的是百度的Paddle库
+
+具体执行代码的步骤如下：
+首先在百度的AIStudio平台创建项目的时候选择添加UCF_101数据集
+# 解压数据ZIP
+unzip /home/aistudio/data/data11460/UCF-101.zip -d /home/aistudio/work/
+python avi2jpg.py
+python jpg2pkl.py
+python data_list_gener.py
+
+# 从以前训练的文件加载模型
+python train.py --use_gpu True --epoch 1 --pretrain True
+
+python eval.py --weights 'checkpoints_models/tsn_model' --use_gpu True
+
+python infer.py --weights 'checkpoints_models/tsn_model' --use_gpu True
